@@ -1,0 +1,40 @@
+{
+  "name": "@bomgar/start-session-js",
+  "description": "Start Session API",
+  "scripts": {
+    "test": "playwright test --browser all tests/*.spec.ts",
+    "test-chrome": "npm run test-chromium",
+    "test-chromium": "playwright test --browser chromium tests/*.spec.ts",
+    "test-firefox": "playwright test --browser firefox tests/*.spec.ts",
+    "test-webkit": "playwright test --browser webkit tests/*.spec.ts",
+    "test-safari": "npm run test-webkit",
+    "build-prod": "esbuild lib/start_session.js --platform=browser --bundle --minify --target=es2017 --color=false --outfile=./dist/start_session-min.js",
+    "build-watch": "esbuild lib/start_session.js --watch --platform=browser --bundle --sourcemap --target=es2017 --color=false --outfile=./dist/start_session.js",
+    "build-debug": "esbuild lib/start_session.js --platform=browser --bundle --sourcemap --target=es2017 --color=false --outfile=./dist/start_session.js",
+    "build": "npm run build-debug",
+    "prod": "npm run build-prod",
+    "build-all": "rm -rf ./dist/* && npm run build-prod && npm run build-debug",
+    "sync": "bg-web-sync --start-session-api --no-watch .",
+    "sync-watch": "bg-web-sync --start-session-api --watch ."
+  },
+  "author": "BeyondTrust Corporation",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@bomgar/typescript-utils": "git+ssh://git@git.bt3ng.com:7999/try/typescript-utils.git#d9eaf3b8619ed483305dd5e8bc9a3821c9dd4374",
+    "@bomgar/user-agent-detector": "git+ssh://git.bt3ng.com:7999/try/user-agent-detector.git#cb6b64cf9a31db750cde7ded3590039274684aa3",
+    "esbuild": "~0.14.34",
+    "tslib": "~2.2.0"
+  },
+  "devDependencies": {
+    "@bomgar/bg-web-sync": "git+ssh://git@git.bt3ng.com:7999/~bsimpson/web-watch-sync.git#480b550f03a429c0927dd592c3fc9488c2a2e87b",
+    "@playwright/test": "^1.23.1",
+    "@types/node": "~18.11.11",
+    "@typescript-eslint/eslint-plugin": "~5.36.2",
+    "@typescript-eslint/parser": "~5.36.2",
+    "eslint": "~8.22.0",
+    "rxjs": "~6.6.7",
+    "ts-node": "~10.7.0",
+    "typescript": "~4.6.3"
+  }
+}
